@@ -20,5 +20,5 @@ app.use('/log', logRoutes);
 app.use('/backend/test-db', testDbRoutes); // اضافه شدن مسیر جدید
 
 // تنظیمات پورت
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
