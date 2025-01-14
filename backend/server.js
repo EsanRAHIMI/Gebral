@@ -1,44 +1,24 @@
 const express = require('express');
-const app = express();
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
-const { Pool } = require('pg');
-const { exec } = require('child_process');
-const fs = require('fs');
 const path = require('path');
+const logRoutes = require('./routes/log');
+const testDbRoutes = require('./routes/testDb'); // اضافه شدن مسیر جدید
 
-// بارگذاری متغیرهای محیطی
-dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '.env') });
 
-// فعال کردن Cors و Body Parser
+const app = express();
+
+// Middleware
 app.use(cors());
 app.use(bodyParser.json());
 
-// اتصال به پایگاه داده
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-});
+// مسیرهای مختلف
+app.get('/', (req, res) => res.send('Backend is running!'));
+app.use('/log', logRoutes);
+app.use('/backend/test-db', testDbRoutes); // اضافه شدن مسیر جدید
 
-// مسیر اصلی برای بررسی وضعیت سرور
-app.get('/', (req, res) => {
-  res.send('Backend is running!');
-});
-
-// مسیر تست اتصال به پایگاه داده
-app.get('/backend/test-db', async (req, res) => {
-  try {
-    const result = await pool.query('SELECT NOW()'); // اجرای کوئری ساده برای دریافت زمان
-    res.json({ success: true, timestamp: result.rows[0].now }); // ارسال نتیجه به کلاینت
-  } catch (error) {
-    res.status(500).json({ success: false, error: error.message }); // ارسال خطا به کلاینت
-  }
-});
-
-
-// تنظیمات پورت و شروع سرور
-const PORT = process.env.PORT || 5001; // مقدار پیش‌فرض برای پورت
+// تنظیمات پورت
+const PORT = process.env.PORT || 5001;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
