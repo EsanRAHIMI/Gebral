@@ -12,4 +12,4 @@ build/
 # System files
 .DS_Store
 
-check_versions.log
+*.log
