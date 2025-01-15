@@ -1,15 +1,14 @@
 const express = require('express');
 const router = express.Router();
 const { Pool } = require('pg');
+const config = require('../config');
+
+// انتخاب محیط (default: development)
+const env = process.env.NODE_ENV || 'development';
+const dbConfig = config[env];
 
 // تنظیمات پایگاه داده
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-});
+const pool = new Pool(dbConfig.connection);
 
 // مسیر تست اتصال به پایگاه داده
 router.get('/', async (req, res) => {
@@ -21,4 +20,4 @@ router.get('/', async (req, res) => {
   }
 });
 
-module.exports = router; // اطمینان حاصل کنید که این خروجی صحیح است
+module.exports = router;

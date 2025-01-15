@@ -1,13 +1,12 @@
-
 const { Pool } = require('pg');
+const config = require('./config');
 
-const pool = new Pool({
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  user: process.env.DB_USER,
-  password: process.env.DB_PASS,
-  database: process.env.DB_NAME,
-});
+// انتخاب محیط (default: development)
+const env = process.env.NODE_ENV || 'development';
+const dbConfig = config[env];
+
+const pool = new Pool(dbConfig.connection);
+
 (async () => {
   try {
     const result = await pool.query('SELECT NOW()');
