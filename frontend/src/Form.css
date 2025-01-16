@@ -1,0 +1,62 @@
+/* /Users/ehsanrahimi/Gabrel/app/frontend/src/Form.css */
+body {
+    background-color: #1c1c1c;
+    color: #e71b1b;
+    font-family: 'Arial', sans-serif;
+  }
+  
+  .form-container {
+    background-color: #2e2e2e;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 400px;
+    margin: 50px auto;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  }
+  
+  h2 {
+    color: #ffd700;
+    text-align: center;
+  }
+  
+  label {
+    display: block;
+    margin-bottom: 5px;
+    color: #d3d3d3;
+  }
+  
+  input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #444;
+    border-radius: 5px;
+    background-color: #3c3c3c;
+    color: #fff;
+  }
+  
+  input:focus {
+    border-color: #ffd700;
+    outline: none;
+  }
+  
+  .error {
+    color: #ff6347;
+    margin-bottom: 20px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4a464662;
+    border: none;
+    border-radius: 5px;
+    color: #1c1c1c;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #e6c200;
+  }
+  
