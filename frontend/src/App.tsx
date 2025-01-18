@@ -9,7 +9,6 @@ function App() {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [token, setToken] = useState<string | null>(null);
-  const [data, setData] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
 
   const handleLogin = async (e: React.FormEvent) => {
@@ -24,7 +23,8 @@ function App() {
       });
 
       if (!response.ok) {
-        throw new Error('Login failed');
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Login failed');
       }
 
       const result = await response.json();
@@ -56,7 +56,10 @@ function App() {
         />
         <button type="submit">Login</button>
       </form>
-      <button>Fetch Protected Data</button>
+      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <button onClick={() => console.log('Protected Data')} style={{ marginTop: '20px' }}>
+        Fetch Protected Data
+      </button>
       <Link to="/logs" style={{ display: 'block', marginTop: '20px', color: 'blue' }}>
         View Logs
       </Link>
