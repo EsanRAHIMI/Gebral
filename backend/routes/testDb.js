@@ -3,12 +3,13 @@ const router = express.Router();
 const { Pool } = require('pg');
 const config = require('../config');
 
-// انتخاب محیط (default: development)
-const env = process.env.NODE_ENV || 'development';
-const dbConfig = config[env];
+// بررسی مقدار تنظیمات پایگاه داده
+if (!config || !config.connection) {
+  throw new Error('Database configuration is missing or incorrect');
+}
 
 // تنظیمات پایگاه داده
-const pool = new Pool(dbConfig.connection);
+const pool = new Pool(config.connection);
 
 // مسیر تست اتصال به پایگاه داده
 router.get('/', async (req, res) => {
@@ -16,6 +17,7 @@ router.get('/', async (req, res) => {
     const result = await pool.query('SELECT NOW()');
     res.json({ success: true, timestamp: result.rows[0].now });
   } catch (error) {
+    console.error('Database connection error:', error);
     res.status(500).json({ success: false, error: error.message });
   }
 });
