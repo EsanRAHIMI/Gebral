@@ -27,9 +27,9 @@ console.log(`Running in ${env} mode`);
 
 // مسیرهای مختلف
 app.get('/', (req, res) => res.send('Backend is running!'));
-app.use('/testdb', testDbRoutes);
-app.use('/auth', authRoutes); // مسیر احراز هویت
-app.use('/tasks', taskRoutes); // مسیر مدیریت وظایف
+app.use('/backend/testdb', testDbRoutes);
+app.use('/backend/auth', authRoutes); // مسیر احراز هویت
+app.use('/backend/tasks', taskRoutes); // مسیر مدیریت وظایف
 
 // تنظیمات پورت
 const PORT = process.env.PORT || 5001;
