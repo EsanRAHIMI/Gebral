@@ -14,21 +14,21 @@ const config = {
   development: {
     ...sharedConfig,
     connection: {
-      host: process.env.DB_HOST || 'localhost',
-      port: parseInt(process.env.DB_PORT) || 5432,
-      user: process.env.DB_USER || 'esan',
-      password: process.env.DB_PASS || 'IRan8813ch564._',
-      database: process.env.DB_NAME || 'gabriel_dev',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
     },
   },
   production: {
     ...sharedConfig,
     connection: {
-      host: process.env.DB_HOST || 'gebral-db-rlwxdk',
-      port: parseInt(process.env.DB_PORT) || 5432,
-      user: process.env.DB_USER || 'esan',
-      password: process.env.DB_PASS || 'IRan8813ch564._',
-      database: process.env.DB_NAME || 'gabriel',
+      host: process.env.DB_HOST,
+      port: parseInt(process.env.DB_PORT),
+      user: process.env.DB_USER,
+      password: process.env.DB_PASS,
+      database: process.env.DB_NAME,
     },
   },
 };
@@ -37,5 +37,5 @@ if (!config[env]) {
   throw new Error(`Invalid NODE_ENV value: ${env}`);
 }
 
-console.log(`Running in ${env} mode`);
+//console.log(`Running in ${env} mode`);
 module.exports = config[env];
