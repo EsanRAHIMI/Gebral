@@ -61,7 +61,7 @@ function show_directory_structure {
   echo -e "${BLUE}Project Directory Structure${NC}"
   echo -e "${CYAN}=====================================${NC}" | tee -a "$LOG_FILE"
   
-  tree -I 'node_modules' -L 4 | tee -a "$LOG_FILE"
+  tree -I 'node_modules|dist' -L 4 | tee -a "$LOG_FILE"
 }
 
 # وضعیت کانتینرهای Docker
