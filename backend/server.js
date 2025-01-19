@@ -27,7 +27,7 @@ console.log(`Running in ${env} mode`);
 
 // مسیرهای مختلف
 app.get('/', (req, res) => res.send('Backend is running!'));
-app.use('/backend/testdb', testDbRoutes);
+app.use('/testdb', testDbRoutes);
 app.use('/auth', authRoutes); // مسیر احراز هویت
 app.use('/tasks', taskRoutes); // مسیر مدیریت وظایف
 
