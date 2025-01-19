@@ -3,21 +3,21 @@ const fs = require('fs');
 const path = require('path');
 const router = express.Router();
 
-// لیست فایل‌های انتخابی
+// مسیر صحیح را برای محیط Docker یا سرور تنظیم کنید
 const selectedFiles = [
-    'backend/server.js',
-    'backend/config.js',
-    'frontend/src/App.tsx'
+    path.join(__dirname, '../server.js'),
+    path.join(__dirname, '../config.js')
 ];
 
-// گرفتن محتوای فایل‌ها
 router.get('/', async (req, res) => {
     try {
         const fileContents = selectedFiles.map(file => {
-            const filePath = path.join(__dirname, '..', file);
+            if (!fs.existsSync(file)) {
+                throw new Error(`File not found: ${file}`);
+            }
             return {
-                file: file,
-                content: fs.readFileSync(filePath, 'utf-8')
+                file: path.basename(file),
+                content: fs.readFileSync(file, 'utf-8')
             };
         });
         res.json(fileContents);
