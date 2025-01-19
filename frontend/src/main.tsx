@@ -9,6 +9,7 @@ import Signup from './Signup';
 import Dashboard from './Dashboard';
 import './index.css';
 import TasksPage from './TasksPage';
+import CodeViewer from './CodeViewer';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
@@ -19,6 +20,7 @@ createRoot(document.getElementById('root')!).render(
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/tasks" element={<TasksPage />} />
+        <Route path="/code" element={<CodeViewer />} />
       </Routes>
     </Router>
   </StrictMode>

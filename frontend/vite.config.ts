@@ -20,10 +20,13 @@ export default defineConfig(({ mode }) => {
       },
     },
     server: {
+      host: '0.0.0.0', // برای دسترسی از سایر دستگاه‌ها
+      port: 5173,  // تغییر پورت در صورت نیاز
       proxy: {
         '/api': {
           target: env.VITE_BACKEND_URL,
           changeOrigin: true,
+          secure: false,
           rewrite: (path) => path.replace(/^\/api/, ''), // بازنویسی مسیرهای API
         },
       },
