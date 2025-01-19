@@ -29,5 +29,12 @@
   "devDependencies": {
     "knex": "^3.1.0",
     "nodemon": "^3.1.9"
+  },
+  
+  "compilerOptions": {
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "strict": true,
+    "esModuleInterop": true
   }
 }
