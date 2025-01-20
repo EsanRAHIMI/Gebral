@@ -22,7 +22,7 @@ const CodeViewer: React.FC = () => {
 
   return (
     <div style={{ padding: '20px' }}>
-      <h1>Selected Project Files</h1>
+      <h1>Project Files</h1>
       {files.map((file, index) => (
         <div key={index} style={{ marginBottom: '20px' }}>
           <h2 style={{ color: 'white' }}>{file.file}</h2>
@@ -32,7 +32,7 @@ const CodeViewer: React.FC = () => {
         </div>
       ))}
 
-      <h1>Project Directory Structure</h1>
+      <h1>Project Directory</h1>
       <pre style={{ background: '#f4f4f4', padding: '10px', borderRadius: '5px', whiteSpace: 'pre-wrap' }}>
         {directoryTree}
       </pre>
