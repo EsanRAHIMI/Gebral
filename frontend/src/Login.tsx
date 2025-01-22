@@ -1,68 +1,74 @@
-// /Users/ehsanrahimi/Gabrel/app/frontend/src/Login.tsx
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import './Form.css';
+import React from "react";
+import { useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import "./App.css";
+
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Login = () => {
   const navigate = useNavigate();
 
   const formik = useFormik({
     initialValues: {
-      email: '',
-      password: '',
+      email: "",
+      password: "",
     },
     validationSchema: Yup.object({
-      email: Yup.string().email('ایمیل نامعتبر است').required('ایمیل الزامی است'),
-      password: Yup.string().min(6, 'رمز عبور باید حداقل ۶ کاراکتر باشد').required('رمز عبور الزامی است'),
+      email: Yup.string().email("Invalid email").required("Email is required"),
+      password: Yup.string()
+        .min(6, "Minimum 6 characters")
+        .required("Password is required"),
     }),
     onSubmit: async (values) => {
       try {
-        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/auth/login`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
+        const response = await fetch(`${BACKEND_URL}/auth/login`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify(values),
         });
 
-        if (!response.ok) {
-          throw new Error('ورود ناموفق بود');
-        }
+        if (!response.ok) throw new Error("Invalid credentials");
 
-        navigate('/dashboard');
+        const data = await response.json();
+        localStorage.setItem("token", data.token);
+        localStorage.setItem(
+          "user",
+          JSON.stringify({ id: data.id, name: data.email })
+        );
+
+        navigate("/dashboard");
       } catch (error) {
-        console.error(error);
+        console.error("Login error:", error);
       }
     },
   });
 
   return (
-    <div className="form-container">
-      <h2>ورود</h2>
+    <div className="container">
+      <h2>Login</h2>
       <form onSubmit={formik.handleSubmit}>
-        <label htmlFor="email">ایمیل</label>
-        <input
-          id="email"
-          name="email"
-          type="email"
-          onChange={formik.handleChange}
-          value={formik.values.email}
-        />
-        {formik.errors.email ? <div className="error">{formik.errors.email}</div> : null}
+        <div className="form-group">
+          <label>Email:</label>
+          <input
+            type="email"
+            {...formik.getFieldProps("email")}
+            className="input-field"
+          />
+        </div>
 
-        <label htmlFor="password">رمز عبور</label>
-        <input
-          id="password"
-          name="password"
-          type="password"
-          onChange={formik.handleChange}
-          value={formik.values.password}
-        />
-        {formik.errors.password ? <div className="error">{formik.errors.password}</div> : null}
+        <div className="form-group">
+          <label>Password:</label>
+          <input
+            type="password"
+            {...formik.getFieldProps("password")}
+            className="input-field"
+          />
+        </div>
 
-        <button type="submit">ورود</button>
+        <button type="submit" className="btn-primary">
+          Login
+        </button>
       </form>
     </div>
   );

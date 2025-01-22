@@ -3,11 +3,11 @@ import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './index.css';
+import './App.css';
 import App from './App';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
-import './index.css';
 import TasksPage from './TasksPage';
 import CodeViewer from './CodeViewer';
 

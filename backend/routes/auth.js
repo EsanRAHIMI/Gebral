@@ -9,11 +9,11 @@ const SECRET_KEY = process.env.SECRET_KEY || 'your-secret-key';
 // Register a new user
 router.post('/signup', async (req, res) => {
   const { email, password, name } = req.body;
-  try {
-    if (!email || !password || !name) {
-      return res.status(400).json({ error: 'All fields are required.' });
-    }
+  if (!email || !password || !name) {
+    return res.status(400).json({ error: 'All fields are required.' });
+  }
 
+  try {
     const userExists = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
     if (userExists.rows.length > 0) {
       return res.status(409).json({ error: 'Email already registered.' });
@@ -35,11 +35,11 @@ router.post('/signup', async (req, res) => {
 // Login user
 router.post('/login', async (req, res) => {
   const { email, password } = req.body;
-  try {
-    if (!email || !password) {
-      return res.status(400).json({ error: 'Email and password are required.' });
-    }
+  if (!email || !password) {
+    return res.status(400).json({ error: 'Email and password are required.' });
+  }
 
+  try {
     const user = await pool.query('SELECT * FROM users WHERE email = $1', [email]);
     if (user.rows.length === 0) {
       return res.status(404).json({ error: 'User not found.' });
@@ -50,11 +50,13 @@ router.post('/login', async (req, res) => {
       return res.status(401).json({ error: 'Invalid credentials.' });
     }
 
-    const token = jwt.sign({ id: user.rows[0].id, email: user.rows[0].email }, SECRET_KEY, {
-      expiresIn: '1h',
-    });
+    const token = jwt.sign(
+      { id: user.rows[0].id, email: user.rows[0].email },
+      SECRET_KEY,
+      { expiresIn: '1h' }
+    );
 
-    res.status(200).json({ token, message: 'Login successful.' });
+    res.status(200).json({ token, user: { id: user.rows[0].id, name: user.rows[0].name } });
   } catch (error) {
     console.error('Error logging in user:', error);
     res.status(500).json({ error: 'Internal server error.' });

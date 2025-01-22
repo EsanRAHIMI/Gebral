@@ -9,26 +9,27 @@ const frontendRoot = path.resolve(__dirname, '../../frontend');
 
 // لیست فایل‌های انتخاب‌شده برای نمایش
 const selectedFiles = [
+    path.join(backendRoot, '.env'),
     path.join(backendRoot, 'server.js'),
     path.join(backendRoot, 'config.js'),
     path.join(backendRoot, 'routes', 'auth.js'),
     path.join(backendRoot, 'routes', 'tasks.js'),
-    path.join(backendRoot, '.env'),
     path.join(backendRoot, 'knexfile.js'),
     path.join(backendRoot, 'db','migrations','20241228180000_create_enums.js'),
     path.join(backendRoot, 'db','migrations','20250111200224_create_users_table.js'),
     path.join(backendRoot, 'db','migrations','20250111200248_create_tasks_table.js'),
     path.join(backendRoot, 'db','migrations','20250111200310_create_health_data_table.js'),
 
-    path.join(frontendRoot, 'vite.config.ts'),
     path.join(frontendRoot, '.env'),
     path.join(frontendRoot, 'src', 'App.css'),
+    path.join(frontendRoot, 'src', 'index.css'),
     path.join(frontendRoot, 'src', 'App.tsx'),
     path.join(frontendRoot, 'src', 'Dashboard.tsx'),
     path.join(frontendRoot, 'src', 'Login.tsx'),
-    path.join(frontendRoot, 'src', 'main.tsx'),
     path.join(frontendRoot, 'src', 'Signup.tsx'),
-    path.join(frontendRoot, 'src', 'TasksPage.tsx')
+    path.join(frontendRoot, 'src', 'TasksPage.tsx'),
+    path.join(frontendRoot, 'src', 'main.tsx'),
+    path.join(frontendRoot, 'vite.config.ts')
 ];
 
 // دایرکتوری‌های ناخواسته که باید فیلتر شوند

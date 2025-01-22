@@ -1,7 +1,8 @@
-import React from 'react';
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
-import { useNavigate } from 'react-router-dom';
+import React from "react";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { useNavigate } from "react-router-dom";
+import "./App.css";
 
 const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
@@ -10,74 +11,97 @@ const Signup = () => {
 
   const formik = useFormik({
     initialValues: {
-      name: '',
-      email: '',
-      password: '',
+      name: "",
+      email: "",
+      password: "",
     },
     validationSchema: Yup.object({
-      name: Yup.string().required('Name is required'),
-      email: Yup.string().email('Invalid email address').required('Email is required'),
-      password: Yup.string().min(6, 'Password must be at least 6 characters').required('Password is required'),
+      name: Yup.string().required("Name is required"),
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      password: Yup.string()
+        .min(6, "Password must be at least 6 characters")
+        .required("Password is required"),
     }),
     onSubmit: async (values) => {
       try {
         const response = await fetch(`${BACKEND_URL}/auth/signup`, {
-          method: 'POST',
+          method: "POST",
           headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
           },
           body: JSON.stringify(values),
         });
         if (!response.ok) {
-          const errorData = await response.json();
-          console.error('Signup failed:', errorData.message);
-          throw new Error(errorData.message || 'Signup failed');
+          throw new Error("Signup failed");
         }
-                navigate('/');
-      } catch (err) {
-        console.error(err);
+        navigate("/login");
+      } catch (err: unknown) {
+        if (err instanceof Error) {
+          console.error("Error during signup:", err.message);
+        } else {
+          console.error("An unexpected error occurred", err);
+        }
       }
     },
   });
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Sign Up</h1>
+    <div className="container">
+      <h2 className="heading">Sign Up</h2>
       <form onSubmit={formik.handleSubmit}>
-        <div>
-          <label>Name:</label>
+        <div className="form-group">
+          <label htmlFor="name">Name:</label>
           <input
+            id="name"
             type="text"
-            name="name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            {...formik.getFieldProps("name")}
+            className="input-field"
           />
-          {formik.touched.name && formik.errors.name ? <p>{formik.errors.name}</p> : null}
+          {formik.touched.name && formik.errors.name && (
+            <div className="error-message">{formik.errors.name}</div>
+          )}
         </div>
-        <div>
-          <label>Email:</label>
+
+        <div className="form-group">
+          <label htmlFor="email">Email:</label>
           <input
+            id="email"
             type="email"
-            name="email"
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            {...formik.getFieldProps("email")}
+            className="input-field"
           />
-          {formik.touched.email && formik.errors.email ? <p>{formik.errors.email}</p> : null}
+          {formik.touched.email && formik.errors.email && (
+            <div className="error-message">{formik.errors.email}</div>
+          )}
         </div>
-        <div>
-          <label>Password:</label>
+
+        <div className="form-group">
+          <label htmlFor="password">Password:</label>
           <input
+            id="password"
             type="password"
-            name="password"
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
+            {...formik.getFieldProps("password")}
+            className="input-field"
           />
-          {formik.touched.password && formik.errors.password ? <p>{formik.errors.password}</p> : null}
+          {formik.touched.password && formik.errors.password && (
+            <div className="error-message">{formik.errors.password}</div>
+          )}
         </div>
-        <button type="submit">Sign Up</button>
+
+        <div className="button-group">
+          <button type="submit" className="btn-primary">
+            Sign Up
+          </button>
+          <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className="btn-secondary"
+          >
+            Back
+          </button>
+        </div>
       </form>
     </div>
   );
