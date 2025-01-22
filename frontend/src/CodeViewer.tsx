@@ -14,13 +14,21 @@ const CodeViewer: React.FC = () => {
   useEffect(() => {
     const fetchFiles = async () => {
       try {
-        const response = await fetch(`${BACKEND_URL}/code`);
+        const controller = new AbortController();
+        const timeout = setTimeout(() => controller.abort(), 5000);
+
+        const response = await fetch(`${BACKEND_URL}/code`, { signal: controller.signal });
+        clearTimeout(timeout);
+
         if (!response.ok) throw new Error('Failed to fetch files');
+
         const data = await response.json();
         setFiles(data.files || []);
         setDirectoryTree(data.directoryTree || '');
       } catch (error) {
         console.error('Error fetching files:', error);
+        setFiles([]);
+        setDirectoryTree('Error: Could not load directory structure');
       }
     };
 

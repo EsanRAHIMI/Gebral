@@ -14,10 +14,10 @@ const selectedFiles = [
     path.join(backendRoot, 'routes', 'auth.js'),
     path.join(backendRoot, 'routes', 'tasks.js'),
     path.join(backendRoot, 'knexfile.js'),
-    path.join(backendRoot, 'db','migrations','20241228180000_create_enums.js'),
-    path.join(backendRoot, 'db','migrations','20250111200224_create_users_table.js'),
-    path.join(backendRoot, 'db','migrations','20250111200248_create_tasks_table.js'),
-    path.join(backendRoot, 'db','migrations','20250111200310_create_health_data_table.js'),
+    path.join(backendRoot, 'db', 'migrations', '20241228180000_create_enums.js'),
+    path.join(backendRoot, 'db', 'migrations', '20250111200224_create_users_table.js'),
+    path.join(backendRoot, 'db', 'migrations', '20250111200248_create_tasks_table.js'),
+    path.join(backendRoot, 'db', 'migrations', '20250111200310_create_health_data_table.js'),
     path.join(frontendRoot, '.env'),
     path.join(frontendRoot, 'src', 'App.css'),
     path.join(frontendRoot, 'src', 'index.css'),
@@ -30,7 +30,7 @@ const selectedFiles = [
     path.join(frontendRoot, 'vite.config.ts')
 ];
 
-const excludedDirs = ['node_modules', '.git', 'dist', 'build', 'coverage','.DS_Store'];
+const excludedDirs = ['node_modules', '.git', 'dist', 'build', 'coverage', '.DS_Store'];
 
 const getDirectoryStructure = (dirPath) => {
     const files = fs.readdirSync(dirPath, { withFileTypes: true });
@@ -78,11 +78,22 @@ router.get('/', async (req, res) => {
             }
         });
 
-        const backendStructure = getDirectoryStructure(backendRoot);
-        const frontendStructure = getDirectoryStructure(frontendRoot);
+        let backendTree = 'Error: Could not load backend directory';
+        let frontendTree = 'Error: Could not load frontend directory';
 
-        const backendTree = generateTree(backendStructure, '');
-        const frontendTree = generateTree(frontendStructure, '');
+        try {
+            const backendStructure = getDirectoryStructure(backendRoot);
+            backendTree = generateTree(backendStructure, '');
+        } catch (error) {
+            console.error('Error generating backend directory tree:', error);
+        }
+
+        try {
+            const frontendStructure = getDirectoryStructure(frontendRoot);
+            frontendTree = generateTree(frontendStructure, '');
+        } catch (error) {
+            console.error('Error generating frontend directory tree:', error);
+        }
 
         const projectTree = `backend/\n${backendTree}\nfrontend/\n${frontendTree}`;
 
