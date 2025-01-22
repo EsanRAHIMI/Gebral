@@ -1,13 +1,12 @@
+// /Users/ehsanrahimi/Gabrel/app/backend/routes/code.js
 const express = require('express');
 const fs = require('fs');
 const path = require('path');
 const router = express.Router();
 
-// مسیرهای پروژه
 const backendRoot = path.resolve(__dirname, '../');
 const frontendRoot = path.resolve(__dirname, '../../frontend');
 
-// لیست فایل‌های انتخاب‌شده برای نمایش
 const selectedFiles = [
     path.join(backendRoot, '.env'),
     path.join(backendRoot, 'server.js'),
@@ -19,7 +18,6 @@ const selectedFiles = [
     path.join(backendRoot, 'db','migrations','20250111200224_create_users_table.js'),
     path.join(backendRoot, 'db','migrations','20250111200248_create_tasks_table.js'),
     path.join(backendRoot, 'db','migrations','20250111200310_create_health_data_table.js'),
-
     path.join(frontendRoot, '.env'),
     path.join(frontendRoot, 'src', 'App.css'),
     path.join(frontendRoot, 'src', 'index.css'),
@@ -32,15 +30,12 @@ const selectedFiles = [
     path.join(frontendRoot, 'vite.config.ts')
 ];
 
-// دایرکتوری‌های ناخواسته که باید فیلتر شوند
 const excludedDirs = ['node_modules', '.git', 'dist', 'build', 'coverage','.DS_Store'];
 
-// تابع بازگشتی برای دریافت ساختار دایرکتوری به‌صورت آبجکت
 const getDirectoryStructure = (dirPath) => {
     const files = fs.readdirSync(dirPath, { withFileTypes: true });
-
     return files
-        .filter(file => !excludedDirs.includes(file.name)) // فیلتر دایرکتوری‌های ناخواسته
+        .filter(file => !excludedDirs.includes(file.name))
         .map(file => {
             const fullPath = path.join(dirPath, file.name);
             return file.isDirectory()
@@ -49,7 +44,6 @@ const getDirectoryStructure = (dirPath) => {
         });
 };
 
-// تابعی برای تولید خروجی درختی
 const generateTree = (nodes, prefix = '') => {
     return nodes
         .map((node, index, array) => {
@@ -69,20 +63,24 @@ const generateTree = (nodes, prefix = '') => {
 router.get('/', async (req, res) => {
     try {
         const fileContents = selectedFiles.map(file => {
-            if (!fs.existsSync(file)) {
-                throw new Error(`File not found: ${file}`);
+            try {
+                if (!fs.existsSync(file)) {
+                    console.warn(`File not found: ${file}`);
+                    return { file: file, content: 'Error: File not found' };
+                }
+                return {
+                    file: file,
+                    content: fs.readFileSync(file, 'utf-8')
+                };
+            } catch (error) {
+                console.error(`Error reading file: ${file}`, error);
+                return { file: file, content: 'Error: Cannot read file' };
             }
-            return {
-                file: file, // نمایش مسیر کامل فایل
-                content: fs.readFileSync(file, 'utf-8')
-            };
         });
 
-        // دریافت ساختار کل پروژه
         const backendStructure = getDirectoryStructure(backendRoot);
         const frontendStructure = getDirectoryStructure(frontendRoot);
 
-        // تولید ساختار درختی برای نمایش
         const backendTree = generateTree(backendStructure, '');
         const frontendTree = generateTree(frontendStructure, '');
 
@@ -90,7 +88,7 @@ router.get('/', async (req, res) => {
 
         res.json({ files: fileContents, directoryTree: projectTree });
     } catch (err) {
-        res.status(500).json({ error: 'Error reading files', details: err.message });
+        res.status(500).json({ error: 'Error processing request', details: err.message });
     }
 });
 

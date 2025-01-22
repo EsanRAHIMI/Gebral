@@ -1,3 +1,4 @@
+// /Users/ehsanrahimi/Gabrel/app/frontend/src/CodeViewer.tsx
 import React, { useEffect, useState } from 'react';
 
 interface FileContent {
@@ -34,9 +35,12 @@ const CodeViewer: React.FC = () => {
           <div key={index} style={styles.fileContainer}>
             <h2 style={styles.fileTitle}># {file.file}:</h2>
             <pre style={styles.codeBlock}>
-              <code>{file.content}</code>
+              <code>
+                {file.content.includes('Error:')
+                  ? <span style={{ color: 'red' }}>{file.content}</span>
+                  : file.content}
+              </code>
             </pre>
-            <h6>______________________________________________________________________</h6>
             <hr style={styles.separator} />
           </div>
         ))
@@ -48,19 +52,20 @@ const CodeViewer: React.FC = () => {
       {directoryTree ? (
         <pre style={styles.directoryTree}>{directoryTree}</pre>
       ) : (
-        <p style={styles.noDataText}>No directory structure available</p>
+        <p style={{ ...styles.noDataText, color: 'red' }}>
+          Failed to load project directory structure.
+        </p>
       )}
     </div>
   );
 };
 
-// استایل‌های بهبود یافته برای نمایش بهتر و خوانایی بالاتر
 const styles = {
   container: {
-    padding: '20px 40px',  // افزایش فاصله از چپ و راست
+    padding: '20px 40px',
     fontFamily: 'Arial, sans-serif',
     maxWidth: '900px',
-    margin: '0 auto',  // مرکز چین شدن محتوا
+    margin: '0 auto',
   },
   heading: {
     color: '#333',
@@ -74,19 +79,19 @@ const styles = {
   },
   fileTitle: {
     color: 'green',
-    marginLeft: '20px',  // اضافه کردن فاصله از چپ
+    marginLeft: '20px',
     fontWeight: 'bold',
   },
   codeBlock: {
     background: '#000000',
-    color: '#ffffff',  // تغییر رنگ متن برای خوانایی بهتر
+    color: '#ffffff',
     padding: '20px',
     borderRadius: '5px',
     overflowX: 'auto' as 'auto',
-    textAlign: 'left' as 'left',  // اطمینان از تراز صحیح متن
+    textAlign: 'left' as 'left',
     whiteSpace: 'pre-wrap',
     fontSize: '14px',
-    marginLeft: '20px',  // جلوگیری از چسبیدن به چپ
+    marginLeft: '20px',
   },
   separator: {
     border: '0px solid #ddd',
