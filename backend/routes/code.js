@@ -16,7 +16,7 @@ const selectedFiles = [
     path.join(backendRoot, 'knexfile.js'),
     path.join(backendRoot, 'db', 'migrations', '20241228180000_create_enums.js'),
     path.join(backendRoot, 'db', 'migrations', '20250111200224_create_users_table.js'),
-    path.join(backendRoot, 'db', 'migrations', '20250111200248_create_tasks_table.js'),
+    path.join(backendRoot, 'db', 'migrations', '20250111200225_create_tasks_table.js'),
     path.join(backendRoot, 'db', 'migrations', '20250111200310_create_health_data_table.js'),
     path.join(frontendRoot, '.env'),
     path.join(frontendRoot, 'src', 'App.css'),
@@ -25,7 +25,9 @@ const selectedFiles = [
     path.join(frontendRoot, 'src', 'Dashboard.tsx'),
     path.join(frontendRoot, 'src', 'Login.tsx'),
     path.join(frontendRoot, 'src', 'Signup.tsx'),
-    path.join(frontendRoot, 'src', 'TasksPage.tsx'),
+    path.join(frontendRoot, 'src', 'Task-Item.tsx'),
+    path.join(frontendRoot, 'src', 'Task-api.ts'),
+    path.join(frontendRoot, 'src', 'Tasks-Page.tsx'),
     path.join(frontendRoot, 'src', 'main.tsx'),
     path.join(frontendRoot, 'vite.config.ts')
 ];

@@ -69,6 +69,13 @@ const Login = () => {
         <button type="submit" className="btn-primary">
           Login
         </button>
+        <button
+            type="button"
+            onClick={() => navigate(-1)}
+            className="btn-secondary"
+          >
+            Back
+          </button>
       </form>
     </div>
   );

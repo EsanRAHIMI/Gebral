@@ -19,7 +19,7 @@ const Dashboard = () => {
       <Link to="/tasks">
         <button className="btn-primary">Manage Your Tasks</button>
       </Link>
-      <button onClick={handleLogout} className="btn-primary">Logout</button>
+      <button onClick={handleLogout} className="btn-secondary">Logout</button>
     </div>
   );
 };

@@ -8,7 +8,7 @@ import App from './App';
 import Login from './Login';
 import Signup from './Signup';
 import Dashboard from './Dashboard';
-import TasksPage from './TasksPage';
+import TasksPage from './Tasks-Page';
 import CodeViewer from './CodeViewer';
 
 createRoot(document.getElementById('root')!).render(
