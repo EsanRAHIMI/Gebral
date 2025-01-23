@@ -1,0 +1,124 @@
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+/* برای نمایش کارت‌ها و جابجایی آنها */
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-light);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  cursor: grab;
+}
+
+.task-item:active {
+  cursor: grabbing;
+  opacity: 0.8;
+}
+
+.task-content {
+  flex-grow: 1;
+}
+
+.task-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary);
+  margin: 0;
+}
+
+.task-description {
+  font-size: 14px;
+  color: var(--secondary);
+  margin-top: 5px;
+}
+
+.task-actions {
+  display: flex;
+  gap: 15px;
+}
+
+/* استایل دکمه‌های ویرایش و حذف */
+.edit-icon, .delete-icon {
+  cursor: pointer;
+  font-size: 20px;
+  transition: color 0.2s ease-in-out, transform 0.2s ease-in-out;
+}
+
+.edit-icon:hover {
+  color: #4caf50;
+  transform: scale(1.1);
+}
+
+.delete-icon:hover {
+  color: #ff4d4d;
+  transform: scale(1.1);
+}
+
+/* استایل برای عنوان صفحه */
+.heading, h1, h2 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* استایل توضیحات */
+.subheading, p {
+  font-size: 1.2rem;
+  color: var(--secondary);
+  text-align: center;
+}
+
+/* استایل دسته‌بندی تسک‌ها */
+.task-category {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary);
+  margin-top: 20px;
+  text-align: left;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 5px;
+}
+
+/* تغییر رنگ‌بندی براساس وضعیت تسک‌ها */
+.task-item.planned {
+  border-left: 5px solid #ffeb3b;
+}
+
+.task-item.in-progress {
+  border-left: 5px solid #ff9800;
+}
+
+.task-item.completed {
+  border-left: 5px solid #4caf50;
+}
+
+/* فرم تسک */
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* انیمیشن برای المان‌ها */
+.task-item:hover {
+  transform: translateY(-3px);
+}
+
+/* تنظیم فاصله‌ها */
+.task-item {
+  border-left: 5px solid var(--primary);
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 15px;
+  transition: all 0.3s ease;
+}

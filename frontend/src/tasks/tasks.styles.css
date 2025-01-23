@@ -1,0 +1,70 @@
+.task-list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  align-items: center;
+}
+
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: var(--bg-light);
+  border-radius: 12px;
+  padding: 20px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.task-content {
+  flex-grow: 1;
+}
+
+.task-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: var(--primary);
+  margin: 0;
+}
+
+.task-description {
+  font-size: 14px;
+  color: var(--secondary);
+  margin-top: 5px;
+}
+
+/* استایل دکمه‌ها */
+.task-actions {
+  display: flex;
+  gap: 1px;
+}
+
+.btn-icon {
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.btn-icon:hover {
+  transform: scale(1.2);
+}
+
+/* افکت‌های وضعیت تسک‌ها */
+.task-item.planned {
+  border-left: 8px solid #643fb8;
+}
+
+.task-item.in-progress {
+  border-left: 5px solid #ff9800;
+}
+
+.task-item.completed {
+  border-left: 5px solid #4caf50;
+}

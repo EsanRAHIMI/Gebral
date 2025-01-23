@@ -1,0 +1,148 @@
+:root {
+  --font-primary: 'Poppins', sans-serif;
+  --color-light: #f4f4f4;
+  --color-dark: #121212;
+  --bg-light: #ffffff;
+  --bg-dark: #1a1a1a;
+  --primary: #250c34;  /* بنفش برای دکمه‌های اصلی */
+  --secondary: #4A4A4A; /* طوسی برای دکمه بازگشت */
+  --accent: #8c52ff;
+  --hover: #6a3dbf;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-dark);
+  color: var(--color-light);
+  font-family: var(--font-primary);
+}
+
+.container {
+  background-color: var(--bg-light);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  padding: 40px;
+  max-width: 500px;
+  width: 90%;
+  text-align: center;
+  transition: all 0.3s ease-in-out;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+}
+
+a {
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--hover);
+}
+
+/* دکمه های اصلی (مانند ثبت نام) */
+.btn-primary, .btn-secondary {
+  font-family: var(--font-primary);
+  color: var(--color-light);
+  border: none;
+  border-radius: 8px;
+  padding: 14px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease-in-out;
+  width: 100%;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn-primary {
+  background-color: var(--primary);
+}
+
+.btn-primary:hover {
+  background-color: var(--hover);
+  transform: scale(1.05);
+}
+
+.btn-secondary {
+  background-color: var(--secondary);
+}
+
+.btn-secondary:hover {
+  background-color: #666;
+  transform: scale(1.05);
+}
+
+/* استایل فیلدهای ورودی */
+.input-field {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid var(--secondary);
+  border-radius: 8px;
+  font-size: 16px;
+  color: #000;
+  background-color: #fff;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+.input-field::placeholder {
+  color: #888;
+}
+
+.input-field:focus {
+  border-color: var(--accent);
+  outline: none;
+  box-shadow: 0 0 10px rgba(140, 82, 255, 0.5);
+}
+
+/* پیام‌های خطا */
+.error-message {
+  color: red;
+  font-size: 14px;
+  margin-top: 5px;
+}
+
+/* تیترها */
+.heading {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 20px;
+}
+
+/* تنظیم فاصله بین عناصر فرم */
+.form-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+label {
+  font-weight: bold;
+  color: var(--secondary);
+}
+
+.task-item {
+  background: var(--bg-light);
+  border-radius: 8px;
+  padding: 15px;
+  margin-bottom: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: left;
+}
+
+/* برای صفحات کوچک */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+    width: 95%;
+  }
+}

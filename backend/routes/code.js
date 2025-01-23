@@ -19,17 +19,22 @@ const selectedFiles = [
     path.join(backendRoot, 'db', 'migrations', '20250111200225_create_tasks_table.js'),
     path.join(backendRoot, 'db', 'migrations', '20250111200310_create_health_data_table.js'),
     path.join(frontendRoot, '.env'),
+    path.join(frontendRoot, 'src', 'main.tsx'),
+    path.join(frontendRoot, 'vite.config.ts'),
     path.join(frontendRoot, 'src', 'App.css'),
     path.join(frontendRoot, 'src', 'index.css'),
     path.join(frontendRoot, 'src', 'App.tsx'),
     path.join(frontendRoot, 'src', 'Dashboard.tsx'),
     path.join(frontendRoot, 'src', 'Login.tsx'),
     path.join(frontendRoot, 'src', 'Signup.tsx'),
-    path.join(frontendRoot, 'src', 'Task-Item.tsx'),
-    path.join(frontendRoot, 'src', 'Task-api.ts'),
-    path.join(frontendRoot, 'src', 'Tasks-Page.tsx'),
-    path.join(frontendRoot, 'src', 'main.tsx'),
-    path.join(frontendRoot, 'vite.config.ts')
+    path.join(frontendRoot, 'src', 'tasks', 'TasksPage.tsx'),
+    path.join(frontendRoot, 'src', 'tasks', 'tasks.components.tsx'),
+    path.join(frontendRoot, 'src', 'tasks', 'tasks.hooks.ts'),
+    path.join(frontendRoot, 'src', 'tasks', 'tasks.service.ts'),
+    path.join(frontendRoot, 'src', 'tasks', 'tasks.styles.css'),
+    path.join(frontendRoot, 'src', 'tasks', 'tasks.types.ts'),
+    path.join(frontendRoot, 'src', 'tasks', 'tasks.utils.ts'),
+    path.join(frontendRoot, 'src', 'tasks', 'index.ts')
 ];
 
 const excludedDirs = ['node_modules', '.git', 'dist', 'build', 'coverage', '.DS_Store'];
