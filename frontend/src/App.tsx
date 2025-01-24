@@ -5,7 +5,8 @@ import "./App.css";
 const App = () => {
   return (
     <div className="container">
-      <h1 className="heading">Welcome to Gebral AI</h1>
+      <h1 className="heading">🔮 Gebral</h1>
+      <h2 className="subheading">The Unstoppable You</h2>
       <p className="subheading">Your smart AI-based life management tool.</p>
       <div className="form-group">
         <Link to="/login">

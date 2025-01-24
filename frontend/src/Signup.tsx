@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +8,11 @@ const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const Signup = () => {
   const navigate = useNavigate();
+
+  useEffect(() => {
+    document.title = `GEBRAL 🔮 | Sign Up `;
+  }, []);
+  
 
   const formik = useFormik({
     initialValues: {

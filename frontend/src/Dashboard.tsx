@@ -1,10 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './App.css';
 
 const Dashboard = () => {
   const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem('user') || '{}');
+
+  useEffect(() => {
+    document.title = `GEBRAL 🔮 | Dashboard - ${user.name || 'Guest'}`;
+    
+    return () => {
+      document.title = "GEBRAL";  // مقدار پیش‌فرض هنگام خروج از صفحه
+    };
+  }, [user.name]);
 
   const handleLogout = () => {
     localStorage.removeItem('token');

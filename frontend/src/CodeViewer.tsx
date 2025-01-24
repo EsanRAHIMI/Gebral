@@ -12,6 +12,10 @@ const CodeViewer: React.FC = () => {
   const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
   useEffect(() => {
+    document.title = `Code `;
+  }, []);
+
+  useEffect(() => {
     const fetchFiles = async () => {
       try {
         const controller = new AbortController();
