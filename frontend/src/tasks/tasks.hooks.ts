@@ -6,8 +6,8 @@ import {
   updateTaskOrder,
 } from "./tasks.service";
 
-interface Task {
-  id: number;
+export interface Task {
+  id: string;
   title: string;
   description: string;
   status: "planned" | "in-progress" | "completed";
@@ -38,33 +38,23 @@ export const useTasks = () => {
 
   const handleAddOrUpdateTask = async (
     task: Partial<Task>,
-    taskId?: number
+    taskId?: string
   ) => {
     try {
       const token = localStorage.getItem("token") || "";
-      if (task.title && task.description && task.status) {
-        await addOrUpdateTask(
-          token,
-          task as { title: string; description: string; status: string },
-          taskId
-        );
-      } else {
-        throw new Error("Task is missing required fields");
-      }
+      await addOrUpdateTask(token, task as Task, taskId);
       loadTasks();
     } catch {
       setError("Failed to add or update task");
     }
   };
 
-  const handleDeleteTask = async (taskId: number) => {
-    console.log("Deleting task with id:", taskId);
+  const handleDeleteTask = async (taskId: string) => {
     try {
       const token = localStorage.getItem("token") || "";
       await deleteTask(token, taskId);
       loadTasks();
-    } catch (err) {
-      console.error("Error deleting task:", err);
+    } catch {
       setError("Failed to delete task");
     }
   };

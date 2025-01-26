@@ -5,13 +5,13 @@ import { Task } from "./tasks.types";
 
 interface TaskItemProps {
   task: Task;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
   onEdit: (task: Task) => void;
 }
 
 export const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onEdit }) => {
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: task.id.toString() });
+    useSortable({ id: task.id });
 
   const style: React.CSSProperties = {
     transform: CSS.Transform.toString(transform),
@@ -58,7 +58,7 @@ export const TaskItem: React.FC<TaskItemProps> = ({ task, onDelete, onEdit }) =>
 
 interface TaskListProps {
   tasks: Task[];
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
   onEdit: (task: Task) => void;
 }
 

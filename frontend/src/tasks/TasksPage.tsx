@@ -49,24 +49,23 @@ const TasksPage: React.FC = () => {
     setStatus("planned");
     setEditingTask(null);
   };
-
+  
   const handleDragEnd = (event: any) => {
     const { active, over } = event;
     if (!over || active.id === over.id) return;
-
-    const oldIndex = tasks.findIndex(
-      (task) => task.id.toString() === active.id
-    );
-    const newIndex = tasks.findIndex((task) => task.id.toString() === over.id);
+  
+    const oldIndex = tasks.findIndex((task) => task.id === active.id);
+    const newIndex = tasks.findIndex((task) => task.id === over.id);
     const reorderedTasks = arrayMove(tasks, oldIndex, newIndex).map(
       (task, index) => ({
         ...task,
         order: index + 1,
       })
     );
-
+  
     handleReorderTasks(reorderedTasks);
   };
+  
 
   const sensors = useSensors(useSensor(PointerSensor));
 

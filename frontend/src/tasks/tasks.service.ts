@@ -11,7 +11,7 @@ export const fetchTasks = async (token: string) => {
 export const addOrUpdateTask = async (
   token: string,
   task: { title: string; description: string; status: string },
-  taskId?: number
+  taskId?: string // شناسه تغییر داده شده
 ) => {
   const url = taskId ? `${BACKEND_URL}/tasks/${taskId}` : `${BACKEND_URL}/tasks/`;
   const method = taskId ? "PUT" : "POST";
@@ -29,7 +29,7 @@ export const addOrUpdateTask = async (
   return response.json();
 };
 
-export const deleteTask = async (token: string, taskId: number) => {
+export const deleteTask = async (token: string, taskId: string) => {
   const response = await fetch(`${BACKEND_URL}/tasks/${taskId}`, {
     method: "DELETE",
     headers: { Authorization: `Bearer ${token}` },
@@ -37,7 +37,10 @@ export const deleteTask = async (token: string, taskId: number) => {
   if (!response.ok) throw new Error("Failed to delete task");
 };
 
-export const updateTaskOrder = async (token: string, updatedTasks: { id: number; order: number }[]) => {
+export const updateTaskOrder = async (
+  token: string,
+  updatedTasks: { id: string; order: number }[]
+) => {
   await fetch(`${BACKEND_URL}/tasks/reorder`, {
     method: "POST",
     headers: {
